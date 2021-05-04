@@ -26,4 +26,9 @@ export class HijoComponent implements OnInit {
     this.cambioContador.emit(this.contador);
   }
 
+  resetNieto(nuevoContador) {
+    this.contador = nuevoContador;
+    this.cambioContador.emit(this.contador);
+  }
+
 }

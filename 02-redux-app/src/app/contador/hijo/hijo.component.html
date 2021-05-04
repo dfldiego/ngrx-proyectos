@@ -7,3 +7,14 @@
     <button class="btn btn-info" (click)="dividir()">Dividir</button>
   </div>
 </div>
+
+<hr />
+
+<div class="row">
+  <div class="col">
+    <app-nieto
+      [contador]="contador"
+      (contadorCambio)="resetNieto($event)"
+    ></app-nieto>
+  </div>
+</div>
