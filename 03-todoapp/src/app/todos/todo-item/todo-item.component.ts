@@ -37,6 +37,7 @@ export class TodoItemComponent implements OnInit {
 
   editar() {
     this.editando = true;
+    this.txtInput.setValue(this.todo.texto);
 
     setTimeout(() => {
       this.txtInputFisico.nativeElement.select();
@@ -46,8 +47,8 @@ export class TodoItemComponent implements OnInit {
   terminarEdicion() {
     this.editando = false;
 
-    //validar si es vacio, no modifique edicion.
-    if (this.txtInput.value === '') {
+    //validamos que input no sea invalido.
+    if (this.txtInput.invalid) {
       return;
     }
 
