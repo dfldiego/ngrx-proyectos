@@ -45,6 +45,22 @@ export class TodoItemComponent implements OnInit {
 
   terminarEdicion() {
     this.editando = false;
+
+    //validar si es vacio, no modifique edicion.
+    if (this.txtInput.value === '') {
+      return;
+    }
+
+    //validar que si input no se modifica, no dispare el Action Editar
+    if (this.txtInput.value === this.todo.texto) {
+      return;
+    }
+
+    this.store.dispatch(actions.editar({
+      id: this.todo.id,
+      texto: this.txtInput.value
+    }))
+
   }
 
 }
