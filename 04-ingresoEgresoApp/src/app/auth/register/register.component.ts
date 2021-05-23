@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -35,6 +36,14 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    // agregamos un sweetAlert mientras nos registramos
+    Swal.fire({
+      title: 'Espere por favor',
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    })
+
     //desestructuramos lo que viene del formulario
     const { nombre, correo, password } = this.formGroup.value
 
@@ -43,10 +52,17 @@ export class RegisterComponent implements OnInit {
     this.authService.crearUsuario(nombre, correo, password)
       .then(credenciales => {
         console.log(credenciales);
+        //cerramos el sweetAlert
+        Swal.close();
+        //nos redirigimos a ruta /
         this.router.navigate(['/'])
       })
-      .catch(err => console.error(err));
-
+      .catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.message,
+        })
+      });
   }
-
 }
