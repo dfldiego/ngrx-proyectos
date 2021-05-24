@@ -11,6 +11,7 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
   ) {
+    console.log("se ejecuta constructor")
     this.authService.initAuthListener();
   }
 
