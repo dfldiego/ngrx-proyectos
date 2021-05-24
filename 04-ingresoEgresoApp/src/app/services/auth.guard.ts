@@ -14,6 +14,8 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) { }
 
+  // isAuth() devuelve un Observable<boolean>
+  // tap() -> si no esta autenticado direccionar a /login
   canActivate(): Observable<boolean> {
     return this.authService.isAuth().pipe(
       tap(state => !state ? this.router.navigate(['/login']) : null
